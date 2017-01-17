@@ -18,7 +18,7 @@ Make sure the document root is set to the "public" folder
 ## Usage
 
 Submit an order to /api/discount (POST request) using raw JSON in the request body.
-Optionally, add the header 'Accept: application/json', so the respons is ALWAYS in JSON, even if fatal errors occur.
+Optionally, add the header 'Accept: application/json', so the response is ALWAYS in JSON, even if fatal errors occur.
 
 When a valid order is submitted, the response will be in JSON. It consists of:
 - the original order, modified according to the discounts (if any)
