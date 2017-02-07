@@ -44,14 +44,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($request->expectsJson()) {
+
+        if ($exception instanceof DiscountException) {
+
            return response()->json(
             [
                 'error' => true,
-                'error_message' => 'Fatal error. '.$exception->getMessage(),
-                'status_code' => 500
-            ], 500); 
+                'error_message' => $exception->getMessage(),
+                'status_code' => $exception->getCode()
+            ], $exception->getCode()); 
         }
+
 
         return parent::render($request, $exception);
     }

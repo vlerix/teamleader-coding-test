@@ -72,7 +72,7 @@ class DiscountTest extends TestCase
                  'error' => false,
                  'status_code' => 200,
                  'discounts' => 1,
-                 'total' => 67.04
+                 'total' => 65.10
              ]);
     } 
     public function test2Discounts()
