@@ -46,7 +46,29 @@ class DiscountTest extends TestCase
                  'error' => true,
                  'status_code' => 404
              ]);
-    }    
+    }  
+    public function testOverallDiscount()
+    {
+        $this->postJson('/api/discount', json_decode('{
+  "id": "2",
+  "customer-id": "2",
+  "items": [
+    {
+      "product-id": "B102",
+      "quantity": "4",
+      "unit-price": "4.99",
+      "total": "24.95"
+    }
+  ],
+  "total": "24.95"
+}',true))
+             ->seeJson([
+                 'error' => false,
+                 'status_code' => 200,
+                 'discounts' => 1,
+                 'total' => 22.45
+             ]);
+    } 
     public function test1Discount()
     {
         $this->postJson('/api/discount', json_decode('{
