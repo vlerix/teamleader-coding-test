@@ -69,6 +69,50 @@ class DiscountTest extends TestCase
                  'total' => 22.45
              ]);
     } 
+    public function testSwitchesDiscount()
+    {
+        $this->postJson('/api/discount', json_decode('{
+  "id": "1",
+  "customer-id": "1",
+  "items": [
+    {
+      "product-id": "B102",
+      "quantity": "5",
+      "unit-price": "4.99",
+      "total": "49.90"
+    }
+  ],
+  "total": "49.90"
+}',true))
+             ->seeJson([
+                 'error' => false,
+                 'status_code' => 200,
+                 'discounts' => 1,
+                 'quantity' => 6
+             ]);
+    }    
+    public function testToolsDiscount()
+    {
+        $this->postJson('/api/discount', json_decode('{
+  "id": "3",
+  "customer-id": "3",
+  "items": [
+    {
+      "product-id": "A101",
+      "quantity": "2",
+      "unit-price": "9.75",
+      "total": "19.50"
+    }
+  ],
+  "total": "19.50"
+}',true))
+             ->seeJson([
+                 'error' => false,
+                 'status_code' => 200,
+                 'discounts' => 1,
+                 'unit-price' => 7.80
+             ]);
+    }     
     public function test1Discount()
     {
         $this->postJson('/api/discount', json_decode('{
